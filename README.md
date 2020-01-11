@@ -1,5 +1,7 @@
-# Sentora-Live
+# Sentora Live
+
+## DONT NOT USE THESE FILES. THEY NEED TO BE UPDATED!!!
 
 * Version: 1.0.3.1
 
-Coming Soon!!!
+## COMING SOON!!!
