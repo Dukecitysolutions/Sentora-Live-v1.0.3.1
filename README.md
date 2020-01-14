@@ -1,6 +1,6 @@
 # Sentora Live
 
-## DONT NOT USE THESE FILES. WORK IN PROGRESS!!!
+## PLEASE DONT USE THESE FILES. WORK IN PROGRESS!!!
 
 * Version: 1.0.3.1 or (v1.0.4) if/when Sentora accepts.
 
