@@ -50,11 +50,8 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':uid', $uid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
             $res = array();
-            $sql->execute();
-            while ($rowdomains = $sql->fetch()) {
+            while ($rowdomains = $numrows->fetch()) {
                 array_push($res, array('subname' => $rowdomains['vh_name_vc'],
                     'subdirectory' => $rowdomains['vh_directory_vc'],
                     'subactive' => $rowdomains['vh_active_in'],
@@ -75,11 +72,11 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':uid', $uid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
+            
+      
             $res = array();
-            $sql->execute();
-            while ($rowdomains = $sql->fetch()) {
+        
+            while ($rowdomains = $numrows->fetch()) {
                 array_push($res, array('name' => $rowdomains['vh_name_vc'],
                     'directory' => $rowdomains['vh_directory_vc'],
                     'active' => $rowdomains['vh_active_in'],
