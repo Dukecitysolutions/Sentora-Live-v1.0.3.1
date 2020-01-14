@@ -45,11 +45,8 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':uid', $uid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
             $res = array();
-            $sql->execute();
-            while ($rowmysql = $sql->fetch()) {
+            while ($rowmysql = $numrows->fetch()) {
                 $numrowdb = $zdbh->query("SELECT COUNT(*) FROM x_mysql_dbmap WHERE mm_acc_fk=" . $rowmysql['my_acc_fk'] . " AND mm_database_fk=" . $rowmysql['my_id_pk'] . "")->fetch();
                 $res[] = array('mysqlid' => $rowmysql['my_id_pk'],
                     'totaldb' => $numrowdb[0],
@@ -71,11 +68,10 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':mysqlid', $mysqlid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':mysqlid', $mysqlid);
+         
             $res = array();
-            $sql->execute();
-            while ($rowmysql = $sql->fetch()) {
+        
+            while ($rowmysql = $numrows->fetch()) {
                 $res[] = array('mysqlid' => $rowmysql['my_id_pk'],
                     'mysqlname' => $rowmysql['my_name_vc'],
                     'mysqlsize' => $rowmysql['my_usedspace_bi'],
