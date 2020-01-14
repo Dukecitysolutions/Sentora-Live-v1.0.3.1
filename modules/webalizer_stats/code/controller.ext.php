@@ -20,11 +20,10 @@ class module_controller extends ctrl_module
         $numrows->execute();
 
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':userid', $currentuser['userid']);
+         
             $res = array();
-            $sql->execute();
-            while ($rowclients = $sql->fetch()) {
+       
+            while ($rowclients = $numrows->fetch()) {
                 array_push($res, array('vh_id_pk' => $rowclients['vh_id_pk'],
                     'vh_name_vc' => $rowclients['vh_name_vc']));
             }
