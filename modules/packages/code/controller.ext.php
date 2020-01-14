@@ -49,11 +49,10 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':uid', $uid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
+          
             $res = array();
-            $sql->execute();
-            while ($rowpackages = $sql->fetch()) {
+       
+            while ($rowpackages = $numrows->fetch()) {
                 //$numrows = $zdbh->query("SELECT COUNT(*) FROM x_accounts WHERE ac_package_fk=" . $rowpackages['pk_id_pk'] . " AND ac_deleted_ts IS NULL")->fetchColumn();
                 $numrows = $zdbh->prepare("SELECT COUNT(*) FROM x_accounts WHERE ac_package_fk=:pk_id_pk AND ac_deleted_ts IS NULL");
                 $numrows->bindParam(':pk_id_pk', $rowpackages['pk_id_pk']);
@@ -81,11 +80,10 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':id', $id);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':id', $id);
+          
             $res = array();
-            $sql->execute();
-            while ($rowpackages = $sql->fetch()) {
+         
+            while ($rowpackages = $numrows->fetch()) {
                 $PHPChecked = "";
                 if ($rowpackages['pk_enablephp_in'] <> 0) {
                     $PHPChecked = "CHECKED";
@@ -352,10 +350,8 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':uid', $uid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
-            $sql->execute();
-            while ($rowpackages = $sql->fetch()) {
+         
+            while ($rowpackages = $numrows->fetch()) {
                 if ($rowpackages['pk_created_ts'] == "") {
                     $add = $zdbh->prepare("UPDATE x_packages SET pk_created_ts=:time
 									WHERE pk_id_pk  =:pk_id_pk");
