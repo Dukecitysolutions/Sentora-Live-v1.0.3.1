@@ -39,11 +39,10 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':module', $module);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':module', $module);
+       
             $res = array();
-            $sql->execute();
-            while ($rowsettings = $sql->fetch()) {
+     
+            while ($rowsettings = $numrows->fetch()) {
                 if (ctrl_options::CheckForPredefinedOptions($rowsettings['so_defvalues_tx'])) {
                     $fieldhtml = ctrl_options::OuputSettingMenuField($rowsettings['so_name_vc'], $rowsettings['so_defvalues_tx'], $rowsettings['so_value_tx']);
                 } else {
@@ -126,10 +125,8 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':module', $module);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':module', $module);
-            $sql->execute();
-            while ($row = $sql->fetch()) {
+          
+            while ($row = $numrows->fetch()) {
                 if (!fs_director::CheckForEmptyValue($controller->GetControllerRequest('FORM', $row['so_name_vc']))) {
                     $updatesql = $zdbh->prepare("UPDATE x_settings SET so_value_tx = :value WHERE so_name_vc = :so_name_vc");
                     $value = $controller->GetControllerRequest('FORM', $row['so_name_vc']);
