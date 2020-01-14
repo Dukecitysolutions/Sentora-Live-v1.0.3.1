@@ -18,4 +18,6 @@ CentOS 6 & 7
 
 Ubuntu 16.04 - Upgraded from 14.04
 
+Debian 7 & 8
+
 # COMING SOON!!!
