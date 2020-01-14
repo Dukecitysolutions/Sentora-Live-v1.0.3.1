@@ -50,10 +50,8 @@ class module_controller extends ctrl_module
         $numrows->execute();
 
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':userid', $uid);
-            $sql->execute();
-            while ($rowmysql = $sql->fetch()) {
+         
+            while ($rowmysql = $numrows->fetch()) {
                 $rowdbSql = "SELECT * FROM x_mysql_databases WHERE my_id_pk=:id AND my_deleted_ts IS NULL";
                 $find = $zdbh->prepare($rowdbSql);
                 $find->bindParam(':id', $rowmysql['mm_database_fk']);
@@ -118,11 +116,10 @@ class module_controller extends ctrl_module
         $numrows->execute();
 
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
+         
             $res = array();
-            $sql->bindParam(':userid', $uid);
-            $sql->execute();
-            while ($rowmysql = $sql->fetch()) {
+      
+            while ($rowmysql = $numrows->fetch()) {
                 array_push($res, array('mysqlid' => $rowmysql['my_id_pk'],
                     'mysqlname' => $rowmysql['my_name_vc']));
             }
@@ -172,11 +169,10 @@ class module_controller extends ctrl_module
         $numrows->execute();
 
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare("SELECT * FROM x_mysql_users WHERE mu_id_pk=:mid AND mu_deleted_ts IS NULL");
+          
             $res = array();
-            $sql->bindParam(':mid', $mid);
-            $sql->execute();
-            while ($rowmysql = $sql->fetch()) {
+           
+            while ($rowmysql = $numrows->fetch()) {
                 array_push($res, array('userid' => $rowmysql['mu_id_pk'],
                     'username' => $rowmysql['mu_name_vc']));
             }
