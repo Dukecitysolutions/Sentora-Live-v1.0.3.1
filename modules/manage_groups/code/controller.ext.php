@@ -41,11 +41,10 @@ class module_controller extends ctrl_module
         $numrows->execute();
         //$numrows = $zdbh->query($sql);
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':gid', $gid);
+         
             $res = array();
-            $sql->execute();
-            while ($rowgroups = $sql->fetch()) {
+        
+            while ($rowgroups = $numrows->fetch()) {
                 array_push($res, array('groupid' => $rowgroups['ug_id_pk'], 'groupname' => ui_language::translate(runtime_xss::xssClean($rowgroups['ug_name_vc'])), 'groupdesc' => ui_language::translate(runtime_xss::xssClean($rowgroups['ug_notes_tx']))));
             }
             return $res;
@@ -63,11 +62,10 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':uid', $uid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
+     
             $res = array();
-            $sql->execute();
-            while ($rowgroups = $sql->fetch()) {
+      
+            while ($rowgroups = $numrows->fetch()) {
                 if ($rowgroups['ug_name_vc'] != "Administrators" &&
                         $rowgroups['ug_name_vc'] != "Resellers" &&
                         $rowgroups['ug_name_vc'] != "Users") {
@@ -91,11 +89,10 @@ class module_controller extends ctrl_module
         $numrows->execute();
         //$numrows = $zdbh->query($sql);
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
+         
             $res = array();
-            $sql->execute();
-            while ($rowgroups = $sql->fetch()) {
+      
+            while ($rowgroups = $numrows->fetch()) {
                 if ($rowgroups['ug_name_vc'] == "Administrators" ||
                         $rowgroups['ug_name_vc'] == "Resellers" ||
                         $rowgroups['ug_name_vc'] == "Users") {
@@ -120,12 +117,10 @@ class module_controller extends ctrl_module
         $numrows->bindParam(':gid', $gid);
         $numrows->execute();
         if ($numrows->fetchColumn() <> 0) {
-            $sql = $zdbh->prepare($sql);
-            $sql->bindParam(':uid', $uid);
-            $sql->bindParam(':gid', $gid);
+        
             $res = array();
-            $sql->execute();
-            while ($rowgroups = $sql->fetch()) {
+         
+            while ($rowgroups = $numrows->fetch()) {
                 array_push($res, array('groupid' => $rowgroups['ug_id_pk'], 'groupname' => ui_language::translate(runtime_xss::xssClean($rowgroups['ug_name_vc'])), 'groupdesc' => ui_language::translate(runtime_xss::xssClean($rowgroups['ug_notes_tx']))));
             }
             return $res;
